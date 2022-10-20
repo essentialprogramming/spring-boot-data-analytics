@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+
+springdoc:
+  api-docs:
+    enabled: false
+  packages-to-scan:
+  swagger-ui:
+     path: apidoc
+     groups-order: DESC
+
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        current_session_context_class: thread
+
+

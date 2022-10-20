@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+  <changeSet id="create-users-table" author="Razvan Prichici">
+    <createTable tableName="users">
+      <column name="id" type="bigint">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="firstname" type="varchar(250)" />
+      <column name="lastname" type="varchar(250)" />
+      <column name="email" type="varchar(55)" />
+      <column name="created_at" type="timestamp with time zone"/>
+      <column name="modified_at" type="timestamp with time zone"/>
+    </createTable>
+    <addAutoIncrement tableName="users" columnName="id" columnDataType="bigint"
+                      startWith="1" incrementBy="1"/>
+
+    <rollback>
+      <dropTable tableName="users"/>
+    </rollback>
+  </changeSet>
+</databaseChangeLog>

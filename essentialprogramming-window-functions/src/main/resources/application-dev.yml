@@ -1,0 +1,19 @@
+springdoc:
+  api-docs:
+    enabled: true
+
+logging:
+  level:
+    com: DEBUG
+
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        current_session_context_class: thread
+
