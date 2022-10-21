@@ -33,7 +33,6 @@ public class UserInput {
     @Pattern(regexp = Patterns.NAME_REGEXP, message = "Invalid lastname! Only uppercase and lowercase letters are allowed.")
     @JsonProperty("lastName")
     private String lastName;
-cd 
 
     @NotNull(message = "Email field can not be null!")
     @Email(message = "Email is invalid! Must be of format: example@domain.com",

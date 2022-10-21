@@ -7,7 +7,7 @@ plugins {
     id("java-library")
 }
 
-//tasks.bootJar { enabled = true }
+tasks.bootJar { enabled = false }
 tasks.jar { enabled = false }
 
 dependencies {
