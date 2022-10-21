@@ -1,8 +1,3 @@
-import org.jooq.meta.jaxb.Property
-import org.jooq.codegen.GenerationTool
-import org.jooq.meta.jaxb.*
-import org.jooq.meta.jaxb.Configuration
-
 plugins {
   id("java")
   id("org.springframework.boot") version "2.7.4"
@@ -12,42 +7,12 @@ plugins {
   id("java-library")
 }
 
-buildscript {
-  dependencies {
-    classpath("org.jooq:jooq-codegen:3.17.4")
-    classpath("org.jooq:jooq-meta-extensions-hibernate:3.17.4")
-  }
-}
-
 tasks.bootJar { enabled = false }
 tasks.jar { enabled = true }
 
 tasks.withType<JavaCompile> {
   options.compilerArgs.add("-AaddGenerationDate=true")
 }
-
-val jooqConfiguration: Configuration = Configuration()
-        .withGenerator(Generator()
-                .withDatabase(Database()
-                        .withName("org.jooq.meta.extensions.jpa.JPADatabase")
-                        .withProperties(
-                                Property()
-                                        .withKey("packages")
-                                        .withValue("com.base.persistence.entities"),
-                                Property()
-                                        .withKey("useAttributeConverters")
-                                        .withValue("true"),
-                                Property()
-                                        .withKey("unqualifiedSchema")
-                                        .withValue("none")
-                        ))
-                .withTarget(org.jooq.meta.jaxb.Target()
-                        .withPackageName("com.base.persistence.entities.generated")
-                        .withDirectory("src/main/java"))
-                .withGenerate( Generate()
-                        .withPojos(true)
-                        .withDaos(true)))
-
 
 dependencies {
 
@@ -56,9 +21,6 @@ dependencies {
 
   implementation(project(":essentialprogramming-util"))
   runtimeOnly(project(":essentialprogramming-util"))
-
-  implementation(project(":entities"))
-  runtimeOnly(project(":entities"))
 
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
   annotationProcessor("org.mapstruct:mapstruct-processor")
@@ -77,15 +39,4 @@ dependencies {
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-  GenerationTool.generate(jooqConfiguration)
 }
-
-// This has no effect for some reason
-//tasks {
-//  build {
-//    doLast {
-//      println("Running JOOQ plugin")
-//      GenerationTool.generate(jooqConfiguration)
-//    }
-//  }
-//}

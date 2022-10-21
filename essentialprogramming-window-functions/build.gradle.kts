@@ -1,9 +1,22 @@
+import org.jooq.meta.jaxb.Property
+import org.jooq.codegen.GenerationTool
+import org.jooq.meta.jaxb.*
+import org.jooq.meta.jaxb.Configuration
+
 plugins {
   id("java")
   id("org.springframework.boot") version "2.7.4"
   id("io.spring.dependency-management") version "1.0.14.RELEASE"
   id("java-conventions")
   id("java-library")
+}
+
+buildscript {
+  dependencies {
+    classpath("org.jooq:jooq-codegen:3.17.4")
+    classpath("org.jooq:jooq-meta-extensions-hibernate:3.17.4")
+    classpath("org.jooq:jooq-meta-extensions")
+  }
 }
 
 tasks.bootJar { enabled = true }
@@ -13,10 +26,30 @@ springBoot {
   buildInfo()
 }
 
-dependencies {
-  implementation(project(":entities"))
-  runtimeOnly(project(":entities"))
+val jooqConfiguration: Configuration = Configuration()
+        .withGenerator(Generator()
+                .withDatabase(Database()
+                        .withName("org.jooq.meta.extensions.jpa.JPADatabase")
+                        .withProperties(
+                                Property()
+                                        .withKey("packages")
+                                        .withValue("com.base.persistence.entities"),
+                                Property()
+                                        .withKey("useAttributeConverters")
+                                        .withValue("true"),
+                                Property()
+                                        .withKey("unqualifiedSchema")
+                                        .withValue("none")
+                        ))
+                .withTarget(org.jooq.meta.jaxb.Target()
+                        .withPackageName("com.base.persistence.entities.generated")
+                        .withDirectory("src/main/java"))
+                .withGenerate( Generate()
+                        .withPojos(true)
+                        .withDaos(true)))
 
+
+dependencies {
   implementation(platform("com.essentialprogramming.platform:platform"))
   annotationProcessor(platform("com.essentialprogramming.platform:platform"))
 
@@ -44,4 +77,6 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
 
   implementation("com.google.guava:guava:31.1-jre")
+
+  GenerationTool.generate(jooqConfiguration)
 }
