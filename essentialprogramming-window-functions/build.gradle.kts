@@ -14,7 +14,8 @@ springBoot {
 }
 
 dependencies {
-
+  implementation(project(":entities"))
+  runtimeOnly(project(":entities"))
 
   implementation(platform("com.essentialprogramming.platform:platform"))
   annotationProcessor(platform("com.essentialprogramming.platform:platform"))
@@ -44,4 +45,3 @@ dependencies {
 
   implementation("com.google.guava:guava:31.1-jre")
 }
-

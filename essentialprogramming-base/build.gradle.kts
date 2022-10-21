@@ -1,9 +1,22 @@
+import org.jooq.meta.jaxb.Property
+import org.jooq.codegen.GenerationTool
+import org.jooq.meta.jaxb.*
+import org.jooq.meta.jaxb.Configuration
+
 plugins {
+  id("java")
   id("org.springframework.boot") version "2.7.4"
   id("io.spring.dependency-management") version "1.0.14.RELEASE"
   id("java-conventions")
   id("maven-publish")
   id("java-library")
+}
+
+buildscript {
+  dependencies {
+    classpath("org.jooq:jooq-codegen:3.17.4")
+    classpath("org.jooq:jooq-meta-extensions-hibernate:3.17.4")
+  }
 }
 
 tasks.bootJar { enabled = false }
@@ -13,6 +26,29 @@ tasks.withType<JavaCompile> {
   options.compilerArgs.add("-AaddGenerationDate=true")
 }
 
+val jooqConfiguration: Configuration = Configuration()
+        .withGenerator(Generator()
+                .withDatabase(Database()
+                        .withName("org.jooq.meta.extensions.jpa.JPADatabase")
+                        .withProperties(
+                                Property()
+                                        .withKey("packages")
+                                        .withValue("com.base.persistence.entities"),
+                                Property()
+                                        .withKey("useAttributeConverters")
+                                        .withValue("true"),
+                                Property()
+                                        .withKey("unqualifiedSchema")
+                                        .withValue("none")
+                        ))
+                .withTarget(org.jooq.meta.jaxb.Target()
+                        .withPackageName("com.base.persistence.entities.generated")
+                        .withDirectory("src/main/java"))
+                .withGenerate( Generate()
+                        .withPojos(true)
+                        .withDaos(true)))
+
+
 dependencies {
 
   implementation(platform("com.essentialprogramming.platform:platform"))
@@ -21,10 +57,12 @@ dependencies {
   implementation(project(":essentialprogramming-util"))
   runtimeOnly(project(":essentialprogramming-util"))
 
+  implementation(project(":entities"))
+  runtimeOnly(project(":entities"))
+
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
   annotationProcessor("org.mapstruct:mapstruct-processor")
   annotationProcessor("org.hibernate:hibernate-jpamodelgen:5.6.9.Final")
-
 
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -33,8 +71,21 @@ dependencies {
   implementation("org.assertj:assertj-core:3.22.0")
   implementation("org.mapstruct:mapstruct")
 
+  implementation("org.springframework.boot:spring-boot-starter-jooq")
+
   testRuntimeOnly("com.h2database:h2:2.1.210")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+  GenerationTool.generate(jooqConfiguration)
 }
+
+// This has no effect for some reason
+//tasks {
+//  build {
+//    doLast {
+//      println("Running JOOQ plugin")
+//      GenerationTool.generate(jooqConfiguration)
+//    }
+//  }
+//}
