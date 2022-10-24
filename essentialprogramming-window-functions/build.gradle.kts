@@ -1,7 +1,15 @@
+import nu.studer.gradle.jooq.JooqEdition
+import org.jooq.meta.jaxb.Logging
 import org.jooq.meta.jaxb.Property
-import org.jooq.codegen.GenerationTool
-import org.jooq.meta.jaxb.*
-import org.jooq.meta.jaxb.Configuration
+
+buildscript {
+  dependencies {
+    // https://medium.com/@marekscholle/jooq-with-gradle-and-java-11-a6f10efff297
+    classpath("org.glassfish.jaxb:jaxb-runtime:4.0.0")
+    classpath("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
+
+  }
+}
 
 plugins {
   id("java")
@@ -9,13 +17,14 @@ plugins {
   id("io.spring.dependency-management") version "1.0.14.RELEASE"
   id("java-conventions")
   id("java-library")
+  id("nu.studer.jooq") version "8.0"
 }
 
-buildscript {
-  dependencies {
-    classpath("org.jooq:jooq-codegen:3.17.4")
-    classpath("org.jooq:jooq-meta-extensions-hibernate:3.17.4")
-    classpath("org.jooq:jooq-meta-extensions")
+repositories {
+  google()
+  mavenCentral()
+  maven {
+    url = uri("https://repo1.maven.org/maven2/")
   }
 }
 
@@ -26,30 +35,8 @@ springBoot {
   buildInfo()
 }
 
-val jooqConfiguration: Configuration = Configuration()
-        .withGenerator(Generator()
-                .withDatabase(Database()
-                        .withName("org.jooq.meta.extensions.jpa.JPADatabase")
-                        .withProperties(
-                                Property()
-                                        .withKey("packages")
-                                        .withValue("com.base.persistence.entities"),
-                                Property()
-                                        .withKey("useAttributeConverters")
-                                        .withValue("true"),
-                                Property()
-                                        .withKey("unqualifiedSchema")
-                                        .withValue("none")
-                        ))
-                .withTarget(org.jooq.meta.jaxb.Target()
-                        .withPackageName("com.base.persistence.entities.generated")
-                        .withDirectory("src/main/java"))
-                .withGenerate( Generate()
-                        .withPojos(true)
-                        .withDaos(true)))
-
-
 dependencies {
+
   implementation(platform("com.essentialprogramming.platform:platform"))
   annotationProcessor(platform("com.essentialprogramming.platform:platform"))
 
@@ -78,5 +65,54 @@ dependencies {
 
   implementation("com.google.guava:guava:31.1-jre")
 
-  GenerationTool.generate(jooqConfiguration)
+  jooqGenerator(project(":essentialprogramming-base"))
+
+  // This solves the JAXB dependency missing from Java 11+
+  jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
+  jooqGenerator("com.sun.xml.bind:jaxb-impl:4.0.0")
+  jooqGenerator("org.glassfish.jaxb:jaxb-runtime:4.0.0")
+  // https://github.com/etiennestuder/gradle-jooq-plugin/issues/34
+  jooqGenerator("org.jooq:jooq-meta-extensions-hibernate:3.17.4")
+  jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
+}
+
+jooq {
+  version.set("3.17.4")
+  edition.set(JooqEdition.OSS)
+
+  configurations {
+    create("main") {
+      jooqConfiguration.apply {
+        logging = Logging.WARN
+
+        generator.apply {
+          name = "org.jooq.codegen.DefaultGenerator"
+          database.apply {
+            name = "org.jooq.meta.extensions.jpa.JPADatabase"
+            properties = listOf(
+              Property().apply {
+                key = "packages"
+                value = "com.base.persistence.entities"
+              },
+              Property().apply {
+                key = "useAttributeConverters"
+                value = "true"
+              }
+            )
+          }
+          generate.apply {
+            isDeprecated = false
+            isRecords = false
+            isImmutablePojos = false
+            isFluentSetters = false
+          }
+          target.apply {
+            packageName = "com.base.persistence.entities.generated"
+            directory = "src/generated/jooq"
+          }
+          strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
+        }
+      }
+    }
+  }
 }

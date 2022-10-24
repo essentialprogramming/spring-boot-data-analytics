@@ -11,7 +11,7 @@ tasks.bootJar { enabled = false }
 tasks.jar { enabled = true }
 
 tasks.withType<JavaCompile> {
-  options.compilerArgs.add("-AaddGenerationDate=true")
+  options.compilerArgs.add("-AddGenerationDate=true")
 }
 
 dependencies {
