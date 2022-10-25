@@ -6,7 +6,9 @@ buildscript {
   dependencies {
     // https://medium.com/@marekscholle/jooq-with-gradle-and-java-11-a6f10efff297
     classpath("org.glassfish.jaxb:jaxb-runtime:4.0.0")
-    classpath("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
+    classpath("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
+    classpath("com.sun.xml.bind:jaxb-impl:4.0.0")
+    classpath("jakarta.persistence:jakarta.persistence-api:3.1.0")
 
   }
 }
@@ -73,7 +75,9 @@ dependencies {
   jooqGenerator("org.glassfish.jaxb:jaxb-runtime:4.0.0")
   // https://github.com/etiennestuder/gradle-jooq-plugin/issues/34
   jooqGenerator("org.jooq:jooq-meta-extensions-hibernate:3.17.4")
-  jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
+  jooqGenerator("javax.xml.bind:jaxb-api:2.2.4")
+  jooqGenerator("jakarta.persistence:jakarta.persistence-api:3.1.0")
+
 }
 
 jooq {
