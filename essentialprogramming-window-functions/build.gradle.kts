@@ -51,15 +51,19 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     developmentOnly("com.h2database:h2:2.1.210")
     testRuntimeOnly("com.h2database:h2:2.1.210")
+    // Example project uses this version of h2, but it doesn't work for us
+//    developmentOnly("com.h2database:h2:1.4.200")
+//    testRuntimeOnly("com.h2database:h2:1.4.200")
     runtimeOnly("org.postgresql:postgresql")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     implementation("com.google.guava:guava:31.1-jre")
 
+//    implementation("org.jooq:jooq-meta-extensions-liquibase:3.14.11")
     jooqGenerator(project(":essentialprogramming-base"))
     jooqGenerator("org.liquibase:liquibase-core:3.10.3")
-    jooqGenerator("org.jooq:jooq-meta-extensions-liquibase:3.17.4")
+    jooqGenerator("org.jooq:jooq-meta-extensions-liquibase:3.15.0")
 }
 
 var rootPath: Path = Paths.get(projectDir.absolutePath, "../essentialprogramming-base/src/main/resources")
@@ -69,7 +73,7 @@ var changelogPath: Path = Paths.get(rootPath.toString(), "db/changelog/db.change
 //changelogPath = projectDir.toPath().relativize(changelogPath)
 
 jooq {
-    version.set("3.14.11")
+    version.set("3.15.0")
 
     configurations {
         create("main") {
