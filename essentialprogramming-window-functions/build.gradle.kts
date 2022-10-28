@@ -1,3 +1,4 @@
+import org.jooq.meta.jaxb.Property
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -7,22 +8,10 @@ plugins {
     id("io.spring.dependency-management") version "1.0.14.RELEASE"
     id("java-conventions")
     id("java-library")
-
     id("nu.studer.jooq") version "5.2.1"
-
 }
 
-val springBootVersion = "2.7.4"
-
-//buildscript {
-//    dependencies {
-//        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-//        classpath("nu.studer:gradle-jooq-plugin:2.0.9")
-//
-//        classpath("org.liquibase:liquibase-core:3.4.1")
-//        classpath 'org.liquibase:liquibase-gradle-plugin:1.1.1'))
-//    }
-//}
+val jooqVersion = "3.16.0"
 
 tasks.bootJar { enabled = true }
 tasks.jar { enabled = false }
@@ -54,34 +43,33 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     developmentOnly("com.h2database:h2:2.1.210")
     testRuntimeOnly("com.h2database:h2:2.1.210")
-    // Example project uses this version of h2, but it doesn't work for us
-//    developmentOnly("com.h2database:h2:1.4.200")
-//    testRuntimeOnly("com.h2database:h2:1.4.200")
     runtimeOnly("org.postgresql:postgresql")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     implementation("com.google.guava:guava:31.1-jre")
 
-    jooqGenerator(project(":essentialprogramming-base"))
     implementation("org.springframework.boot:spring-boot-starter-jooq")
-//    implementation("org.jooq:jooq-meta-extensions-liquibase:3.14.11")
-    implementation("org.jooq:jooq-meta-extensions-liquibase:3.16.0")
+    implementation("org.jooq:jooq-meta-extensions-liquibase:${jooqVersion}")
+
+    jooqGenerator(project(":essentialprogramming-base"))
     jooqGenerator("org.jooq:jooq-meta-extensions-liquibase")
     jooqGenerator("org.liquibase:liquibase-core:3.10.3")
-
     jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
 }
 
-var rootPath: Path = Paths.get(projectDir.absolutePath, "../essentialprogramming-base/src/main/resources")
-var changelogPath: Path = Paths.get(rootPath.toString(), "db/changelog/db.changelog-master.xml")
+var baseProjectPath: String =  Paths.get(projectDir.absolutePath, "../essentialprogramming-base/").toString()
 
-//rootPath = projectDir.toPath().relativize(rootPath)
-//changelogPath = projectDir.toPath().relativize(changelogPath)
+if (project(":essentialprogramming-base").hasProperty("projectDir")) {
+    println("Found base project dir property")
+    baseProjectPath = project(":essentialprogramming-base").property("projectDir").toString()
+}
+
+val rootPath: Path = Paths.get(baseProjectPath, "src/main/resources")
+val changelogPath: Path = Paths.get(rootPath.toString(), "db/changelog/db.changelog-master.xml")
 
 jooq {
-//    version.set("3.14.11")
-    version.set("3.16.0")
+    version.set(jooqVersion)
 
     configurations {
         create("main") {
@@ -91,7 +79,6 @@ jooq {
                 logging = org.jooq.meta.jaxb.Logging.WARN
 
                 generator.apply {
-//                    name = "org.jooq.codegen.KotlinGenerator"
                     name = "org.jooq.codegen.DefaultGenerator"
                     target.apply {
                         packageName = "com.base.persistence.entities.generated"
@@ -100,13 +87,13 @@ jooq {
                     database.apply {
                         name = "org.jooq.meta.extensions.liquibase.LiquibaseDatabase"
                         properties = listOf(
-                                org.jooq.meta.jaxb.Property()
+                                Property()
                                         .withKey("rootPath")
                                         .withValue(rootPath.toString()),
-                                org.jooq.meta.jaxb.Property()
+                                Property()
                                         .withKey("scripts")
                                         .withValue(changelogPath.toString()),
-                                org.jooq.meta.jaxb.Property()
+                                Property()
                                         .withKey("includeLiquibaseTables")
                                         .withValue("false")
                         )
