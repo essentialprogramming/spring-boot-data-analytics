@@ -12,12 +12,15 @@ plugins {
 
 }
 
+val springBootVersion = "2.7.4"
+
 //buildscript {
 //    dependencies {
-//        classpath("org.jooq:jooq-codegen:3.17.4")
-//        classpath("org.liquibase:liquibase-core")
-//        classpath("org.jooq:jooq-meta-extensions-liquibase:3.17.4")
-//        classpath(files("build/classes"))
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+//        classpath("nu.studer:gradle-jooq-plugin:2.0.9")
+//
+//        classpath("org.liquibase:liquibase-core:3.4.1")
+//        classpath 'org.liquibase:liquibase-gradle-plugin:1.1.1'))
 //    }
 //}
 
@@ -60,10 +63,14 @@ dependencies {
 
     implementation("com.google.guava:guava:31.1-jre")
 
-//    implementation("org.jooq:jooq-meta-extensions-liquibase:3.14.11")
     jooqGenerator(project(":essentialprogramming-base"))
+    implementation("org.springframework.boot:spring-boot-starter-jooq")
+//    implementation("org.jooq:jooq-meta-extensions-liquibase:3.14.11")
+    implementation("org.jooq:jooq-meta-extensions-liquibase:3.16.0")
+    jooqGenerator("org.jooq:jooq-meta-extensions-liquibase")
     jooqGenerator("org.liquibase:liquibase-core:3.10.3")
-    jooqGenerator("org.jooq:jooq-meta-extensions-liquibase:3.15.0")
+
+    jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
 }
 
 var rootPath: Path = Paths.get(projectDir.absolutePath, "../essentialprogramming-base/src/main/resources")
@@ -73,7 +80,8 @@ var changelogPath: Path = Paths.get(rootPath.toString(), "db/changelog/db.change
 //changelogPath = projectDir.toPath().relativize(changelogPath)
 
 jooq {
-    version.set("3.15.0")
+//    version.set("3.14.11")
+    version.set("3.16.0")
 
     configurations {
         create("main") {
@@ -83,8 +91,8 @@ jooq {
                 logging = org.jooq.meta.jaxb.Logging.WARN
 
                 generator.apply {
-                    name = "org.jooq.codegen.KotlinGenerator"
-
+//                    name = "org.jooq.codegen.KotlinGenerator"
+                    name = "org.jooq.codegen.DefaultGenerator"
                     target.apply {
                         packageName = "com.base.persistence.entities.generated"
                     }
