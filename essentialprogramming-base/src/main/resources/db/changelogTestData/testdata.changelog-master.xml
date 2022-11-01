@@ -5,8 +5,10 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-  <include relativeToChangelogFile="true" file="create-hibernate-sequence.xml"/>
-  <include relativeToChangelogFile="true" file="create-users-table.xml"/>
-  <include relativeToChangelogFile="true" file="create-group-table.xml"/>
-  <include relativeToChangelogFile="true" file="create-team-table.xml"/>
+  <changeSet id="testdata_group" author="Razvan Prichici">
+    <sqlFile path="testData_group.sql" relativeToChangelogFile="true" />
+  </changeSet>
+  <changeSet id="testdata_team" author="Razvan Prichici">
+    <sqlFile path="testData_team.sql" relativeToChangelogFile="true" />
+  </changeSet>
 </databaseChangeLog>

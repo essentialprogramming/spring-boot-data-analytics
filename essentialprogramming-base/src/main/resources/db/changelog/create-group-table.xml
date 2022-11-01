@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+  <changeSet id="create-group-table" author="Razvan Prichici">
+    <createTable tableName="group">
+      <column name="id" type="bigint">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(250)" />
+    </createTable>
+    <addAutoIncrement tableName="group" columnName="id" columnDataType="bigint"
+                      startWith="1" incrementBy="1"/>
+
+    <rollback>
+      <dropTable tableName="group"/>
+    </rollback>
+  </changeSet>
+</databaseChangeLog>
