@@ -21,6 +21,33 @@
                              referencedTableName="group"
                              referencedColumnNames="id" onDelete="CASCADE"/>
 
+
+    <insert tableName="team">
+      <column name="id" valueNumeric="1"/>
+      <column name="points" valueNumeric="10"/>
+      <column name="groupId" valueNumeric="1"/>
+      <column name="name" value="PSG"/>
+    </insert>
+    <insert tableName="team">
+      <column name="id" valueNumeric="2"/>
+      <column name="points" valueNumeric="9"/>
+      <column name="groupId" valueNumeric="1"/>
+      <column name="name" value="Juventus"/>
+    </insert>
+    <insert tableName="team">
+      <column name="id" valueNumeric="3"/>
+      <column name="points" valueNumeric="8"/>
+      <column name="groupId" valueNumeric="2"/>
+      <column name="name" value="Milan"/>
+    </insert>
+    <insert tableName="team">
+      <column name="id" valueNumeric="4"/>
+      <column name="points" valueNumeric="7"/>
+      <column name="groupId" valueNumeric="2"/>
+      <column name="name" value="Barcelona"/>
+    </insert>
+
+
     <rollback>
       <dropForeignKeyConstraint constraintName="team_groupId_fk"
                                 baseTableName="team"/>

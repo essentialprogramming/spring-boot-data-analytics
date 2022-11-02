@@ -13,6 +13,15 @@
     <addAutoIncrement tableName="group" columnName="id" columnDataType="bigint"
                       startWith="1" incrementBy="1"/>
 
+    <insert tableName="group">
+      <column name="id" valueNumeric="1"/>
+      <column name="name" value="Group A"/>
+    </insert>
+    <insert tableName="group">
+      <column name="id" valueNumeric="2"/>
+      <column name="name" value="Group B"/>
+    </insert>
+
     <rollback>
       <dropTable tableName="group"/>
     </rollback>
