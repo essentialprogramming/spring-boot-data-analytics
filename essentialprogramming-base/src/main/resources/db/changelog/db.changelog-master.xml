@@ -9,4 +9,5 @@
   <include relativeToChangelogFile="true" file="create-users-table.xml"/>
   <include relativeToChangelogFile="true" file="create-group-table.xml"/>
   <include relativeToChangelogFile="true" file="create-team-table.xml"/>
+  <include relativeToChangelogFile="true" file="add-group-b-teams.xml"/>
 </databaseChangeLog>

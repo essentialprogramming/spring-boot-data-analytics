@@ -47,7 +47,6 @@
       <column name="name" value="Barcelona"/>
     </insert>
 
-
     <rollback>
       <dropForeignKeyConstraint constraintName="team_groupId_fk"
                                 baseTableName="team"/>
