@@ -9,10 +9,15 @@ plugins {
   id("java-conventions")
   id("maven-publish")
   id("java-library")
-  id("nu.studer.jooq") version "5.2.1"
+  id("nu.studer.jooq") version "7.1.1"
 }
 
 val jooqVersion = "3.16.0"
+
+buildscript {
+  // Forcing the desired jooq version in spring-boot-starter-jooq
+  extra["jooq.version"] = "3.16.0"
+}
 
 tasks.bootJar { enabled = false }
 tasks.jar { enabled = true }
@@ -40,15 +45,13 @@ dependencies {
   implementation("org.assertj:assertj-core:3.22.0")
   implementation("org.mapstruct:mapstruct")
 
-  implementation("org.springframework.boot:spring-boot-starter-jooq")
-
-
-  implementation("org.springframework.boot:spring-boot-starter-jooq")
+//  implementation("org.springframework.boot:spring-boot-starter-jooq")
+  implementation("org.jooq:jooq:${jooqVersion}")
   implementation("org.jooq:jooq-meta-extensions-liquibase:${jooqVersion}")
-  jooqGenerator("org.jooq:jooq-meta-extensions-liquibase")
+  jooqGenerator("org.jooq:jooq-meta-extensions-liquibase:${jooqVersion}")
   jooqGenerator("org.liquibase:liquibase-core:3.10.3")
   jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
-  jooqGenerator("org.yaml:snakeyaml:1.28")
+  jooqGenerator("org.yaml:snakeyaml:1.33")
 
 
   testRuntimeOnly("com.h2database:h2:2.1.210")

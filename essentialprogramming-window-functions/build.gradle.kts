@@ -4,7 +4,6 @@ plugins {
     id("io.spring.dependency-management") version "1.0.14.RELEASE"
     id("java-conventions")
     id("java-library")
-    id("nu.studer.jooq") version "5.2.1"
 }
 
 tasks.bootJar { enabled = true }

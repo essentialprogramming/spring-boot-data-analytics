@@ -13,6 +13,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Entity(name = "team")
 @Table(name = "team")
+@ToString
 public class Team {
 
     @Id
@@ -28,6 +29,7 @@ public class Team {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "groupId")
+    @ToString.Exclude
     private Group group;
 
 }
