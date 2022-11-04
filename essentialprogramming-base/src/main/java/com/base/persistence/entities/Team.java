@@ -28,7 +28,7 @@ public class Team {
     private int points;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "groupId")
+    @JoinColumn(name = "group_id")
     @ToString.Exclude
     private Group group;
 

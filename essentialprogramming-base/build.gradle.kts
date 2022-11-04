@@ -1,3 +1,4 @@
+import org.jooq.meta.jaxb.*
 import org.jooq.meta.jaxb.Property
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -84,8 +85,7 @@ jooq {
           target.apply {
             packageName = "com.base.persistence.entities.generated"
           }
-
-          database.apply {
+         database.apply {
             name = "org.jooq.meta.extensions.liquibase.LiquibaseDatabase"
             properties = listOf(
                     Property()

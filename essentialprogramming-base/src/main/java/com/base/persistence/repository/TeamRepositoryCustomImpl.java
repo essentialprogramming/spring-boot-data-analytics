@@ -50,7 +50,7 @@ public class TeamRepositoryCustomImpl implements TeamRepositoryCustom {
                 )
                 .from(Team.TEAM)
                 .join(Group.GROUP)
-                .on(Team.TEAM.GROUPID.eq(Group.GROUP.ID))
+                .on(Team.TEAM.GROUP_ID.eq(Group.GROUP.ID))
                 .orderBy(Group.GROUP.NAME.asc())
                 .asTable(subQueryAlias);
 

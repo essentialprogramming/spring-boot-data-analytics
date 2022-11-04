@@ -2,6 +2,9 @@ package com.base.persistance.jooq;
 
 import javax.sql.DataSource;
 
+import org.jooq.conf.RenderNameCase;
+import org.jooq.conf.RenderQuotedNames;
+import org.jooq.conf.Settings;
 import org.jooq.impl.DataSourceConnectionProvider;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultDSLContext;
@@ -32,6 +35,10 @@ public class JOOQConfiguration {
     public DefaultConfiguration configuration() {
         DefaultConfiguration jooqConfiguration = new DefaultConfiguration();
 
+        Settings settings = new Settings()
+            .withRenderNameCase(RenderNameCase.LOWER);
+
+        jooqConfiguration.setSettings(settings);
         jooqConfiguration.set(connectionProvider());
         jooqConfiguration.set(new DefaultExecuteListenerProvider(new ExceptionTranslator()));
 
