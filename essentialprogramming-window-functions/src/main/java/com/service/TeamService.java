@@ -23,9 +23,9 @@ public class TeamService {
     private final TeamRepositoryCustom teamRepository;
 
     @Transactional
-    public List<TeamJSON> getTeamsByGroupId(Integer groupId) {
+    public List<TeamJSON> getTeamsByGroupId(String groupName) {
 
-        final List<Team> teams = teamRepository.getAllTeamsFromGroup(String.valueOf(groupId));
+        final List<Team> teams = teamRepository.getAllTeamsFromGroup(groupName);
 
         if (teams.isEmpty()) {
             throw new HttpClientErrorException(NOT_FOUND, "No teams found for the given group Id!");

@@ -4,26 +4,26 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
   <changeSet id="create-group-table" author="Razvan Prichici">
-    <createTable tableName="GROUP">
+    <createTable tableName="group">
       <column name="id" type="bigint">
         <constraints primaryKey="true" nullable="false"/>
       </column>
       <column name="name" type="varchar(250)" />
     </createTable>
-    <addAutoIncrement tableName="GROUP" columnName="id" columnDataType="bigint"
+    <addAutoIncrement tableName="group" columnName="id" columnDataType="bigint"
                       startWith="1" incrementBy="1"/>
 
-    <insert tableName="GROUP">
+    <insert tableName="group">
       <column name="id" valueNumeric="1"/>
-      <column name="name" value="Group A"/>
+      <column name="name" value="A"/>
     </insert>
-    <insert tableName="GROUP">
+    <insert tableName="group">
       <column name="id" valueNumeric="2"/>
-      <column name="name" value="Group B"/>
+      <column name="name" value="B"/>
     </insert>
 
     <rollback>
-      <dropTable tableName="GROUP"/>
+      <dropTable tableName="group"/>
     </rollback>
   </changeSet>
 </databaseChangeLog>
