@@ -38,11 +38,11 @@ public class TeamController {
                 content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = TeamJSON.class)))
         })
-    public ResponseEntity<List<TeamJSON>> getTeamsByGroupId(@RequestParam(name = "groupId") Integer groupId) {
+    public ResponseEntity<List<TeamJSON>> getTeamsByGroupId(@RequestParam(name = "groupName") String groupName) {
 
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(teamService.getTeamsByGroupId(groupId));
+            .body(teamService.getTeamsByGroupId(groupName));
 
     }
 

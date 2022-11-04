@@ -18,9 +18,8 @@
     <addForeignKeyConstraint baseTableName="team"
                              baseColumnNames="groupId"
                              constraintName="team_groupId_fk"
-                             referencedTableName="GROUP"
+                             referencedTableName="group"
                              referencedColumnNames="id" onDelete="CASCADE"/>
-
 
     <insert tableName="team">
       <column name="id" valueNumeric="1"/>

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TeamRepositoryCustom {
 
-    List<Team> getAllTeamsFromGroup(String groupId);
+    List<Team> getAllTeamsFromGroup(String groupName);
 
     List<TeamStandingDTO> findAllTeamsInFirstPlace();
 
