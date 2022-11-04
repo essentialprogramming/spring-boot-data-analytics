@@ -1,5 +1,8 @@
 package com.api.controller;
 
+import java.util.List;
+
+import com.base.persistence.repository.dto.TeamStandingDTO;
 import com.output.TeamJSON;
 import com.service.TeamService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Tag(description = "Group API", name = "Group Services")
 @RequestMapping("/v1/")
 @RestController
@@ -32,17 +33,31 @@ public class TeamController {
 
     @GetMapping(value = "team-list", produces = {"application/json"})
     @Operation(summary = "Get teams by groupId",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Return all teams from a group",
-                            content = @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = TeamJSON.class)))
-            })
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Return all teams from a group",
+                content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = TeamJSON.class)))
+        })
     public ResponseEntity<List<TeamJSON>> getTeamsByGroupId(@RequestParam(name = "groupId") Integer groupId) {
 
         return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(teamService.getTeamsByGroupId(groupId));
+            .status(HttpStatus.OK)
+            .body(teamService.getTeamsByGroupId(groupId));
 
+    }
+
+    @GetMapping(value = "first-places", produces = {"application/json"})
+    @Operation(summary = "Get first place teams by points",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Return all first place teams",
+                content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = TeamStandingDTO.class)))
+        })
+    public ResponseEntity<List<TeamStandingDTO>> getFirstPlaceTeams() {
+
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(teamService.getFirstPlaceTeams());
     }
 
 }

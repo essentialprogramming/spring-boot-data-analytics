@@ -2,6 +2,7 @@ package com.service;
 
 import com.base.persistence.entities.Team;
 import com.base.persistence.repository.TeamRepository;
+import com.base.persistence.repository.dto.TeamStandingDTO;
 import com.mapper.TeamMapper;
 import com.output.TeamJSON;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -32,7 +34,16 @@ public class TeamService {
         }
         return teams.stream()
                 .map(TeamMapper::teamToTeamJSON)
-                .toList();
+                .collect(Collectors.toList());
     }
 
+    public List<TeamStandingDTO> getFirstPlaceTeams() {
+        final List<TeamStandingDTO> teams = teamRepository.findAllTeamsInFirstPlace();
+
+        if (teams.isEmpty()) {
+            throw new HttpClientErrorException(NOT_FOUND, "No teams found");
+        }
+
+        return teams;
+    }
 }
