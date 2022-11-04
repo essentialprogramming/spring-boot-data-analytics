@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+  <changeSet id="create-group-table" author="Marcus Pop">
+    <renameColumn  catalogName="cat"
+                   columnDataType="int"
+                   newColumnName="group_id"
+                   oldColumnName="groupId"
+                   remarks="Changed to snake case"
+                   schemaName="public"
+                   tableName="team"/>
+  </changeSet>
+</databaseChangeLog>

@@ -34,7 +34,6 @@ public class UserInput {
     @JsonProperty("lastName")
     private String lastName;
 
-
     @NotNull(message = "Email field can not be null!")
     @Email(message = "Email is invalid! Must be of format: example@domain.com",
             regexp = Patterns.EMAIL_REGEXP)

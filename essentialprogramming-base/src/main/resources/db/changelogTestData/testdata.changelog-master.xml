@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+  <changeSet id="testdata_group" author="Razvan Prichici">
+    <sqlFile path="testData_group.sql" relativeToChangelogFile="true" />
+  </changeSet>
+  <changeSet id="testdata_team" author="Razvan Prichici">
+    <sqlFile path="testData_team.sql" relativeToChangelogFile="true" />
+  </changeSet>
+</databaseChangeLog>
