@@ -1,7 +1,7 @@
 package com.service;
 
 import com.base.persistence.entities.Team;
-import com.base.persistence.repository.TeamRepository;
+import com.base.persistence.repository.TeamRepositoryCustom;
 import com.base.persistence.repository.dto.TeamStandingDTO;
 import com.mapper.TeamMapper;
 import com.output.TeamJSON;
@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -22,19 +20,19 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Slf4j
 public class TeamService {
 
-    private final TeamRepository teamRepository;
+    private final TeamRepositoryCustom teamRepository;
 
     @Transactional
     public List<TeamJSON> getTeamsByGroupId(Integer groupId) {
 
-        final List<Team> teams = teamRepository.findAllByGroupId(groupId);
+        final List<Team> teams = teamRepository.getAllTeamsFromGroup(String.valueOf(groupId));
 
         if (teams.isEmpty()) {
             throw new HttpClientErrorException(NOT_FOUND, "No teams found for the given group Id!");
         }
         return teams.stream()
                 .map(TeamMapper::teamToTeamJSON)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<TeamStandingDTO> getFirstPlaceTeams() {
