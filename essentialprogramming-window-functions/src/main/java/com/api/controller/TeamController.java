@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(description = "Group API", name = "Group Services")
+@Tag(description = "Team API", name = "Team Services")
 @RequestMapping("/v1/")
 @RestController
 @Validated

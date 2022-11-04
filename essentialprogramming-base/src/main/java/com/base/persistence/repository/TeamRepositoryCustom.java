@@ -1,10 +1,12 @@
 package com.base.persistence.repository;
 
+import com.base.persistence.entities.Team;
+import com.base.persistence.repository.dto.TeamStandingDTO;
 import java.util.List;
 
-import com.base.persistence.repository.dto.TeamStandingDTO;
-
 public interface TeamRepositoryCustom {
+
+    List<Team> getAllTeamsFromGroup(String groupId);
 
     List<TeamStandingDTO> findAllTeamsInFirstPlace();
 
