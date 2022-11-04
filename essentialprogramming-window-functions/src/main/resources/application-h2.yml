@@ -8,7 +8,7 @@ spring:
         web-allow-others: false
 
   datasource:
-    url: jdbc:h2:file:./data/demo;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;
+    url: jdbc:h2:file:./data/demo;MODE=PostgreSQL;
     driver-class-name: org.h2.Driver
     username: sa
     password: password

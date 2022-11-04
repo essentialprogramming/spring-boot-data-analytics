@@ -12,6 +12,7 @@ import org.jooq.impl.DefaultExecuteListenerProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 
 @Configuration
@@ -19,6 +20,9 @@ public class JOOQConfiguration {
 
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    private Settings jooqSettings;
 
     @Bean
     public DataSourceConnectionProvider connectionProvider() {
@@ -35,10 +39,7 @@ public class JOOQConfiguration {
     public DefaultConfiguration configuration() {
         DefaultConfiguration jooqConfiguration = new DefaultConfiguration();
 
-        Settings settings = new Settings()
-            .withRenderNameCase(RenderNameCase.LOWER);
-
-        jooqConfiguration.setSettings(settings);
+        jooqConfiguration.setSettings(jooqSettings);
         jooqConfiguration.set(connectionProvider());
         jooqConfiguration.set(new DefaultExecuteListenerProvider(new ExceptionTranslator()));
 
