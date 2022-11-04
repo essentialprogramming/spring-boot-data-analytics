@@ -15,8 +15,11 @@ plugins {
 val jooqVersion = "3.16.0"
 
 buildscript {
-  // Forcing the desired jooq version in spring-boot-starter-jooq
-  extra["jooq.version"] = "3.16.0"
+  configurations["classpath"].resolutionStrategy.eachDependency {
+    if (requested.group == "org.jooq") {
+      useVersion("3.16.0")
+    }
+  }
 }
 
 tasks.bootJar { enabled = false }
@@ -48,6 +51,8 @@ dependencies {
 //  implementation("org.springframework.boot:spring-boot-starter-jooq")
   implementation("org.jooq:jooq:${jooqVersion}")
   implementation("org.jooq:jooq-meta-extensions-liquibase:${jooqVersion}")
+
+  jooqGenerator("org.postgresql:postgresql")
   jooqGenerator("org.jooq:jooq-meta-extensions-liquibase:${jooqVersion}")
   jooqGenerator("org.liquibase:liquibase-core:3.10.3")
   jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
