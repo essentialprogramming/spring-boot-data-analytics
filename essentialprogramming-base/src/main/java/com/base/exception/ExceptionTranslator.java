@@ -1,4 +1,4 @@
-package com.base.persistance.jooq;
+package com.base.exception;
 
 import java.util.Objects;
 

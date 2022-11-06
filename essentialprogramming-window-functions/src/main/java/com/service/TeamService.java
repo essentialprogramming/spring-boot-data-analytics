@@ -2,7 +2,7 @@ package com.service;
 
 import com.base.persistence.entities.Team;
 import com.base.persistence.repository.TeamRepositoryCustom;
-import com.base.persistence.repository.dto.TeamStandingDTO;
+import com.base.persistence.model.TeamData;
 import com.mapper.TeamMapper;
 import com.output.TeamJSON;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -23,20 +24,21 @@ public class TeamService {
     private final TeamRepositoryCustom teamRepository;
 
     @Transactional
-    public List<TeamJSON> getTeamsByGroupId(String groupName) {
+    public List<TeamJSON> getTeamsByGroupName(final String groupName) {
 
         final List<Team> teams = teamRepository.getAllTeamsFromGroup(groupName);
 
         if (teams.isEmpty()) {
-            throw new HttpClientErrorException(NOT_FOUND, "No teams found for the given group Id!");
+            throw new HttpClientErrorException(NOT_FOUND, "No teams found for the given group name!");
         }
         return teams.stream()
                 .map(TeamMapper::teamToTeamJSON)
-                .toList();
+                .collect(Collectors.toList());
     }
 
-    public List<TeamStandingDTO> getFirstPlaceTeams() {
-        final List<TeamStandingDTO> teams = teamRepository.findAllTeamsInFirstPlace();
+    @Transactional
+    public List<TeamData> getGroupWinners() {
+        final List<TeamData> teams = teamRepository.findAllTeamsInFirstPlace();
 
         if (teams.isEmpty()) {
             throw new HttpClientErrorException(NOT_FOUND, "No teams found");

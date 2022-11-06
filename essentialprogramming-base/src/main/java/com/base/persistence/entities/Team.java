@@ -1,10 +1,9 @@
 package com.base.persistence.entities;
 
+import com.base.persistence.model.TeamData;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.OffsetDateTime;
-import java.util.Optional;
 
 @Builder
 @Getter
@@ -14,6 +13,16 @@ import java.util.Optional;
 @Entity(name = "team")
 @Table(name = "team")
 @ToString
+@SqlResultSetMapping(
+        name = "TeamDataMapping",
+        classes = @ConstructorResult(
+                targetClass = TeamData.class,
+                columns = {
+                        @ColumnResult(name = "group_name"),
+                        @ColumnResult(name = "name"),
+                        @ColumnResult(name = "points", type = Integer.class),
+                        @ColumnResult(name = "ranking", type = Integer.class)})
+)
 public class Team {
 
     @Id

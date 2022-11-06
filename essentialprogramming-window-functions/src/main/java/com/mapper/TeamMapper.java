@@ -9,7 +9,9 @@ public class TeamMapper {
 
     }
 
-    public static TeamJSON teamToTeamJSON(Team team) {
-        return TeamJSON.builder().name(team.getName()).build();
+    public static TeamJSON teamToTeamJSON(final Team team) {
+        return TeamJSON.builder()
+                .name(team.getName())
+                .build();
     }
 }

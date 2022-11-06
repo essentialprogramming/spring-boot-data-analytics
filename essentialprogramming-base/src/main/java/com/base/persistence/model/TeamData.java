@@ -1,4 +1,4 @@
-package com.base.persistence.repository.dto;
+package com.base.persistence.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,19 +6,17 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Describes the placing of a team in its group
+ * Team info and ranking in it`s group.
  */
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
-public class TeamStandingDTO {
 
-    private String name;
+public class TeamData {
 
+    private String group;
+    private String team;
     private Integer points;
-
-    private String groupName;
-
     private Integer ranking;
 }

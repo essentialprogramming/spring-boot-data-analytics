@@ -1,4 +1,3 @@
-import org.jooq.meta.jaxb.*
 import org.jooq.meta.jaxb.Property
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -44,9 +43,9 @@ dependencies {
 
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-  implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2.2")
-  implementation("com.fasterxml.jackson.core:jackson-annotations:2.13.2")
-  implementation("org.assertj:assertj-core:3.22.0")
+  implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4.2")
+  implementation("com.fasterxml.jackson.core:jackson-annotations:2.13.4")
+  implementation("org.assertj:assertj-core:3.23.1")
   implementation("org.mapstruct:mapstruct")
 
 //  implementation("org.springframework.boot:spring-boot-starter-jooq")
@@ -99,6 +98,17 @@ jooq {
                             .withValue(false.toString())
             )
           }
+
+          generate.apply {
+                isRelations = true
+                isDeprecated = false
+                isRecords = true
+                isPojos = true
+                isPojosEqualsAndHashCode = true
+                isImmutablePojos = false
+                isFluentSetters = false
+                isJavaTimeTypes = true
+            }
         }
       }
     }
