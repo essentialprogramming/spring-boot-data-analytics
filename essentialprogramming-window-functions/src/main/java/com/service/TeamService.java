@@ -26,7 +26,7 @@ public class TeamService {
     @Transactional
     public List<TeamJSON> getTeamsByGroupName(final String groupName) {
 
-        final List<Team> teams = teamRepository.getAllTeamsFromGroup(groupName);
+        final List<TeamData> teams = teamRepository.getAllTeamsFromGroup(groupName);
 
         if (teams.isEmpty()) {
             throw new HttpClientErrorException(NOT_FOUND, "No teams found for the given group name!");

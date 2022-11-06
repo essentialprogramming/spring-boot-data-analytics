@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.Tuple;
-import java.math.BigInteger;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -73,7 +72,7 @@ public class TeamRepositoryCustomImpl implements TeamRepositoryCustom {
         return (List<TeamData>) query.getResultList();
     }
 
-    public List<com.base.persistence.entities.Team> getAllTeamsFromGroup(
+    public List<TeamData> getAllTeamsFromGroup(
             final String groupName
     ) {
 
@@ -91,8 +90,8 @@ public class TeamRepositoryCustomImpl implements TeamRepositoryCustom {
         setBindParameterValues(query, jooqQuery);
 
         final List<Tuple> result = query.getResultList();
-        return result.stream().map(field -> new com.base.persistence.entities.Team(
-                field.get(0, BigInteger.class).intValue(),
+        return result.stream().map(field -> new TeamData(
+                field.get(0,  String.class),
                 field.get(1, String.class),
                 field.get(2, Integer.class),
                 null
@@ -102,10 +101,12 @@ public class TeamRepositoryCustomImpl implements TeamRepositoryCustom {
     private Set<Field<?>> getFieldList() {
 
         final Set<Field<?>> fieldList = new LinkedHashSet<>();
+        final Field<Object> groupName = DSL.field("group_name");
 
-        fieldList.add(TEAM.ID);
+        fieldList.add(GROUP.NAME.as(groupName));
         fieldList.add(TEAM.NAME);
         fieldList.add(TEAM.POINTS);
+
 
         return fieldList;
     }

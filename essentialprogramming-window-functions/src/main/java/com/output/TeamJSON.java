@@ -12,5 +12,6 @@ import java.io.Serializable;
 public class TeamJSON implements Serializable {
 
     private String name;
+    private Integer points;
 
 }
