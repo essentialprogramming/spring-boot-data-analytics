@@ -54,25 +54,25 @@
         </insert>
         <insert tableName="team">
             <column name="id" valueNumeric="9"/>
-            <column name="points" valueNumeric="10"/>
+            <column name="points" valueNumeric="18"/>
             <column name="groupId" valueNumeric="3"/>
             <column name="name" value="Bayern"/>
         </insert>
         <insert tableName="team">
             <column name="id" valueNumeric="10"/>
-            <column name="points" valueNumeric="9"/>
+            <column name="points" valueNumeric="10"/>
             <column name="groupId" valueNumeric="3"/>
             <column name="name" value="Inter"/>
         </insert>
         <insert tableName="team">
             <column name="id" valueNumeric="11"/>
-            <column name="points" valueNumeric="8"/>
+            <column name="points" valueNumeric="7"/>
             <column name="groupId" valueNumeric="3"/>
             <column name="name" value="Barcelona"/>
         </insert>
         <insert tableName="team">
             <column name="id" valueNumeric="12"/>
-            <column name="points" valueNumeric="7"/>
+            <column name="points" valueNumeric="0"/>
             <column name="groupId" valueNumeric="3"/>
             <column name="name" value="Plzen"/>
         </insert>
