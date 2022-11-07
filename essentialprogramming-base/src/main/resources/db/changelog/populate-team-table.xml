@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="create-team-table" author="Florin Vlad">
+        <insert tableName="team">
+            <column name="id" valueNumeric="1"/>
+            <column name="points" valueNumeric="10"/>
+            <column name="groupId" valueNumeric="1"/>
+            <column name="name" value="Napoli"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="2"/>
+            <column name="points" valueNumeric="9"/>
+            <column name="groupId" valueNumeric="1"/>
+            <column name="name" value="Liverpool"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="3"/>
+            <column name="points" valueNumeric="8"/>
+            <column name="groupId" valueNumeric="1"/>
+            <column name="name" value="Ajax"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="4"/>
+            <column name="points" valueNumeric="7"/>
+            <column name="groupId" valueNumeric="1"/>
+            <column name="name" value="Rangers"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="5"/>
+            <column name="points" valueNumeric="10"/>
+            <column name="groupId" valueNumeric="2"/>
+            <column name="name" value="Porto"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="6"/>
+            <column name="points" valueNumeric="9"/>
+            <column name="groupId" valueNumeric="2"/>
+            <column name="name" value="Club Brugge"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="7"/>
+            <column name="points" valueNumeric="8"/>
+            <column name="groupId" valueNumeric="2"/>
+            <column name="name" value="Leverkusen"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="8"/>
+            <column name="points" valueNumeric="7"/>
+            <column name="groupId" valueNumeric="2"/>
+            <column name="name" value="Atletico"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="9"/>
+            <column name="points" valueNumeric="10"/>
+            <column name="groupId" valueNumeric="3"/>
+            <column name="name" value="Bayern"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="10"/>
+            <column name="points" valueNumeric="9"/>
+            <column name="groupId" valueNumeric="3"/>
+            <column name="name" value="Inter"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="11"/>
+            <column name="points" valueNumeric="8"/>
+            <column name="groupId" valueNumeric="3"/>
+            <column name="name" value="Barcelona"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="12"/>
+            <column name="points" valueNumeric="7"/>
+            <column name="groupId" valueNumeric="3"/>
+            <column name="name" value="Plzen"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="13"/>
+            <column name="points" valueNumeric="10"/>
+            <column name="groupId" valueNumeric="4"/>
+            <column name="name" value="Tottenham"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="14"/>
+            <column name="points" valueNumeric="9"/>
+            <column name="groupId" valueNumeric="4"/>
+            <column name="name" value="Frankfurt"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="15"/>
+            <column name="points" valueNumeric="8"/>
+            <column name="groupId" valueNumeric="4"/>
+            <column name="name" value="Sporting CP"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="16"/>
+            <column name="points" valueNumeric="7"/>
+            <column name="groupId" valueNumeric="4"/>
+            <column name="name" value="Marseille"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="17"/>
+            <column name="points" valueNumeric="10"/>
+            <column name="groupId" valueNumeric="5"/>
+            <column name="name" value="Chelsea"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="18"/>
+            <column name="points" valueNumeric="9"/>
+            <column name="groupId" valueNumeric="5"/>
+            <column name="name" value="Milan"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="19"/>
+            <column name="points" valueNumeric="8"/>
+            <column name="groupId" valueNumeric="5"/>
+            <column name="name" value="Salzburg"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="20"/>
+            <column name="points" valueNumeric="7"/>
+            <column name="groupId" valueNumeric="5"/>
+            <column name="name" value="Dinamo Zagreb"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="21"/>
+            <column name="points" valueNumeric="10"/>
+            <column name="groupId" valueNumeric="6"/>
+            <column name="name" value="Real Madrid"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="22"/>
+            <column name="points" valueNumeric="9"/>
+            <column name="groupId" valueNumeric="6"/>
+            <column name="name" value="Leipzig"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="23"/>
+            <column name="points" valueNumeric="8"/>
+            <column name="groupId" valueNumeric="6"/>
+            <column name="name" value="Shakhtar Donetsk"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="24"/>
+            <column name="points" valueNumeric="7"/>
+            <column name="groupId" valueNumeric="6"/>
+            <column name="name" value="Celtic"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="25"/>
+            <column name="points" valueNumeric="10"/>
+            <column name="groupId" valueNumeric="7"/>
+            <column name="name" value="Man City"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="26"/>
+            <column name="points" valueNumeric="9"/>
+            <column name="groupId" valueNumeric="7"/>
+            <column name="name" value="Dortmund"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="27"/>
+            <column name="points" valueNumeric="8"/>
+            <column name="groupId" valueNumeric="7"/>
+            <column name="name" value="Sevilla"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="28"/>
+            <column name="points" valueNumeric="7"/>
+            <column name="groupId" valueNumeric="7"/>
+            <column name="name" value="Copenhagen"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="29"/>
+            <column name="points" valueNumeric="10"/>
+            <column name="groupId" valueNumeric="8"/>
+            <column name="name" value="Benfica"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="30"/>
+            <column name="points" valueNumeric="9"/>
+            <column name="groupId" valueNumeric="8"/>
+            <column name="name" value="Paris"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="31"/>
+            <column name="points" valueNumeric="8"/>
+            <column name="groupId" valueNumeric="8"/>
+            <column name="name" value="Juventus"/>
+        </insert>
+        <insert tableName="team">
+            <column name="id" valueNumeric="32"/>
+            <column name="points" valueNumeric="7"/>
+            <column name="groupId" valueNumeric="8"/>
+            <column name="name" value="M. Haifa"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
