@@ -18,3 +18,17 @@ A Quick, Interactive Approach to Learning Data Analytics with SQL using Spring D
  * Always found in the SELECT and ORDER BY
  * Makes queries easier to write
  * Often better performance
+ 
+ ## :page_with_curl: Introduction to SQL Window Functions
+ 
+ Window functions are an advanced SQL feature offered to improve the execution performance of queries. These functions act on a group of rows related to the targeted row called window frame. Unlike a GROUP BY clause, Window functions do not collapse the rows to a single row, preserving the details of each row instead. This new approach to querying data is invaluable in data analytics and business intelligence.
+ 
+ Window functions follow three key steps:
+
+ * They split data into groups
+ * They perform a calculation on each group
+ * They combine the results of those calculations back into the original dataset
+ ![three_key](https://user-images.githubusercontent.com/46305342/200438573-328304bd-63b7-4e40-a1c0-093a9a519bd1.png)
+
+ 
+
