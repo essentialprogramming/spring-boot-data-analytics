@@ -8,3 +8,13 @@ A Quick, Interactive Approach to Learning Data Analytics with SQL using Spring D
  * Interpret data through descriptive statistics and aggregate functions
  * Work with and manipulate data using SQL joins and constraints
  * Speed up your data analysis workflow by optimizing queries
+ 
+ # :bookmark: What are window functions ?
+ 
+ * Nothing to do with Windows OS
+ * Standard functionality added to T-SQL
+ * Functions that operate on a set or window of rows
+ * Always with an OVER clause (but sometimes you will see an OVER clause without a window funtion)
+ * Always found in the SELECT and ORDER BY
+ * Makes queries easier to write
+ * Often better performance
