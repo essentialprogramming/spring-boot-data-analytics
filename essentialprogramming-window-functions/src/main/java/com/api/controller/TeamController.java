@@ -62,4 +62,18 @@ public class TeamController {
             .body(teamService.getGroupWinners());
     }
 
+    @GetMapping(value = "all-teams-ranked", produces = {"application/json"})
+    @Operation(summary = "Get all teams ranked",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Return all teams ranked by points",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = TeamData.class)))
+            })
+    public ResponseEntity<List<TeamData>> getAllTeamsRanked() {
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(teamService.getAllTeamsRanked());
+    }
+
 }

@@ -33,7 +33,6 @@ public class TeamRepositoryCustomImpl implements TeamRepositoryCustom {
     private final EntityManager entityManager;
     private final DSLContext dslContext;
 
-
     @Override
     public List<TeamData> findAllTeamsInFirstPlace() {
         Field<Object> ranking = DSL.field("ranking");
@@ -68,6 +67,34 @@ public class TeamRepositoryCustomImpl implements TeamRepositoryCustom {
         final Query query = entityManager.createNativeQuery(queryString, "TeamDataMapping");
         setBindParameterValues(query, jooqQuery);
 
+        return (List<TeamData>) query.getResultList();
+    }
+
+    @Override
+    public List<TeamData> findAllTeamsRanked() {
+        Field<Object> ranking = DSL.field("ranking");
+        Field<Object> groupName = DSL.field("group_name");
+
+        var jooqQuery =
+                dslContext.select(
+                                TEAM.NAME,
+                                TEAM.POINTS,
+                                GROUP.NAME.as(groupName),
+                                DSL.rank()
+                                        .over()
+                                        .orderBy(TEAM.POINTS.desc())
+                                        .as(ranking)
+                        )
+                        .from(TEAM)
+                        .join(GROUP)
+                        .on(TEAM.GROUP_ID.eq(Group.GROUP.ID))
+                        .orderBy(ranking.asc());
+
+        final String queryString = jooqQuery.getSQL();
+        log.info(queryString);
+
+        final Query query = entityManager.createNativeQuery(queryString, "TeamDataMapping");
+        setBindParameterValues(query, jooqQuery);
 
         return (List<TeamData>) query.getResultList();
     }
@@ -91,7 +118,7 @@ public class TeamRepositoryCustomImpl implements TeamRepositoryCustom {
 
         final List<Tuple> result = query.getResultList();
         return result.stream().map(field -> new TeamData(
-                field.get(0,  String.class),
+                field.get(0, String.class),
                 field.get(1, String.class),
                 field.get(2, Integer.class),
                 null
