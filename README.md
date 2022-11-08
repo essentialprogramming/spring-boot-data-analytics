@@ -53,7 +53,7 @@ Moving on — let’s first answer this question conceptually, using the three s
 
 ![three_key_steps](https://user-images.githubusercontent.com/46305342/200454133-20d0b092-3d27-442b-86e1-27fde6d24f64.png)
 
- * Each group is a window: 
+ * Teams within a group represent a window: 
 
 ![Groups_-_each_group_is_a_window](https://user-images.githubusercontent.com/46305342/200454652-ef082e20-55d3-422c-9bd9-24bf663b4a61.png)
 
