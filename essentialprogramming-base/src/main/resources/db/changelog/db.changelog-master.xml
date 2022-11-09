@@ -7,7 +7,8 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
   <include relativeToChangelogFile="true" file="create-hibernate-sequence.xml"/>
   <include relativeToChangelogFile="true" file="create-group-table.xml"/>
+  <include relativeToChangelogFile="true" file="populate-group-table.xml"/>
   <include relativeToChangelogFile="true" file="create-team-table.xml"/>
-  <include relativeToChangelogFile="true" file="add-group-b-teams.xml"/>
+  <include relativeToChangelogFile="true" file="populate-team-table.xml"/>
   <include relativeToChangelogFile="true" file="change-team-group-fk-column-name.xml"/>
 </databaseChangeLog>

@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface TeamRepositoryCustom {
 
+    List<TeamData> findAllTeamsRanked();
+
     List<TeamData> getAllTeamsFromGroup(final String groupName);
 
     List<TeamData> findAllTeamsInFirstPlace();

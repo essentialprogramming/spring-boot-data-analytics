@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="create-group-table" author="Florin Vlad">
+        <insert tableName="group">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="A"/>
+        </insert>
+        <insert tableName="group">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="B"/>
+        </insert>
+        <insert tableName="group">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="C"/>
+        </insert>
+        <insert tableName="group">
+            <column name="id" valueNumeric="4"/>
+            <column name="name" value="D"/>
+        </insert>
+        <insert tableName="group">
+            <column name="id" valueNumeric="5"/>
+            <column name="name" value="E"/>
+        </insert>
+        <insert tableName="group">
+            <column name="id" valueNumeric="6"/>
+            <column name="name" value="F"/>
+        </insert>
+        <insert tableName="group">
+            <column name="id" valueNumeric="7"/>
+            <column name="name" value="G"/>
+        </insert>
+        <insert tableName="group">
+            <column name="id" valueNumeric="8"/>
+            <column name="name" value="H"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

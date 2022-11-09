@@ -46,4 +46,15 @@ public class TeamService {
 
         return teams;
     }
+
+    @Transactional
+    public List<TeamData> getAllTeamsRanked() {
+        final List<TeamData> teams = teamRepository.findAllTeamsRanked();
+
+        if (teams.isEmpty()) {
+            throw new HttpClientErrorException(NOT_FOUND, "No teams found");
+        }
+
+        return teams;
+    }
 }
