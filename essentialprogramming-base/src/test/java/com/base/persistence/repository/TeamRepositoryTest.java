@@ -2,8 +2,7 @@ package com.base.persistence.repository;
 
 import java.util.stream.IntStream;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
+import com.base.config.JooqConfig;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -12,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Import;
 
 @DataJpaTest
+@Import(value = JooqConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Log4j2
 public class TeamRepositoryTest {
@@ -26,7 +27,6 @@ public class TeamRepositoryTest {
 
     @Test
     void singleTableInsertRetrieveOk() {
-        teamRepository.findAll().forEach(log::info);
         Assertions.assertEquals(55, IntStream.range(1, 11).sum());
     }
 

@@ -60,7 +60,6 @@ dependencies {
 
 
     testRuntimeOnly("com.h2database:h2:2.1.210")
-
     testImplementation("org.jooq:jooq:${jooqVersion}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
