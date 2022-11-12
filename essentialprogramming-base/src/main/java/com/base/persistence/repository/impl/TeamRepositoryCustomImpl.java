@@ -31,6 +31,7 @@ public class TeamRepositoryCustomImpl implements TeamRepositoryCustom {
     @PersistenceContext
     private final EntityManager entityManager;
     private final DSLContext dslContext;
+
     private static final String GROUP_NAME = "group_name";
     private static final String RANKING = "ranking";
 
@@ -39,8 +40,6 @@ public class TeamRepositoryCustomImpl implements TeamRepositoryCustom {
         Field<Object> ranking = DSL.field(RANKING);
         Field<Object> groupName = DSL.field(GROUP_NAME);
         Table<?> subQueryAlias = DSL.table("nested");
-
-        //TODO: should remove ranking from the result. it is redundant
 
         var subQuery =
                 dslContext.select(

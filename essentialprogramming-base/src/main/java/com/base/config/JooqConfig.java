@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import com.base.exception.ExceptionTranslator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.jooq.conf.MappedSchema;
+import org.jooq.conf.RenderMapping;
 import org.jooq.conf.RenderNameCase;
 import org.jooq.conf.Settings;
 import org.jooq.impl.DataSourceConnectionProvider;
@@ -26,6 +28,7 @@ import org.springframework.util.StringUtils;
 public class JooqConfig {
 
     private static final String H2_NAME = "h2";
+    private static final String JOOQ_CODEGEN_SCHEMA = "jooq_codegen";
 
     private final DataSource dataSource;
 
@@ -40,27 +43,36 @@ public class JooqConfig {
     }
 
     public DefaultConfiguration jooqConfiguration() {
-        DefaultConfiguration jooqConfiguration = new DefaultConfiguration();
-        RenderNameCase renderNameCase = RenderNameCase.LOWER;
-        String databaseVendorName = this.getDatabaseVendor();
+        final DefaultConfiguration jooqConfiguration = new DefaultConfiguration();
+        final String databaseVendorName = this.getDatabaseVendor();
 
+        RenderNameCase renderNameCase = RenderNameCase.LOWER;
         if (StringUtils.hasLength(databaseVendorName) && databaseVendorName.equals(H2_NAME)) {
             renderNameCase = RenderNameCase.AS_IS;
         }
 
-        jooqConfiguration.setSettings(new Settings().withRenderNameCase(renderNameCase));
+        jooqConfiguration.setSettings(settings().withRenderNameCase(renderNameCase));
         jooqConfiguration.set(connectionProvider());
         jooqConfiguration.set(new DefaultExecuteListenerProvider(new ExceptionTranslator()));
 
         return jooqConfiguration;
     }
 
+    public Settings settings() {
+        return new Settings()
+                .withRenderMapping(
+                        new RenderMapping()
+                                .withSchemata(new MappedSchema()
+                                        .withInput(JOOQ_CODEGEN_SCHEMA))
+                )
+                .withRenderNameCase(RenderNameCase.AS_IS);
+    }
+
     private String getDatabaseVendor() {
-        Connection connection = DataSourceUtils.getConnection(dataSource);
+        final Connection connection = DataSourceUtils.getConnection(dataSource);
 
         try {
             String dbProductName = connection.getMetaData().getDatabaseProductName();
-
             return dbProductName.toLowerCase();
         } catch (SQLException e) {
             log.info("Error occurred while trying to retrieve the database vendor " + e);

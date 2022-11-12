@@ -39,27 +39,33 @@ dependencies {
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.mapstruct:mapstruct-processor")
-    annotationProcessor("org.hibernate:hibernate-jpamodelgen:5.6.9.Final")
+    annotationProcessor("org.hibernate:hibernate-jpamodelgen:5.6.14.Final")
 
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4.2")
-    implementation("com.fasterxml.jackson.core:jackson-annotations:2.13.4")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.14.0")
     implementation("org.assertj:assertj-core:3.23.1")
+    implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
     implementation("org.mapstruct:mapstruct")
 
 //  implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("org.jooq:jooq:${jooqVersion}")
+    implementation("org.jooq:jooq-meta:${jooqVersion}")
+    implementation("org.jooq:jooq-meta-extensions:${jooqVersion}")
     implementation("org.jooq:jooq-meta-extensions-liquibase:${jooqVersion}")
 
     jooqGenerator("org.postgresql:postgresql")
     jooqGenerator("org.jooq:jooq-meta-extensions-liquibase:${jooqVersion}")
     jooqGenerator("org.liquibase:liquibase-core:3.10.3")
     jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
+    jooqGenerator("com.fasterxml.jackson.core:jackson-databind:2.14.0")
+    jooqGenerator("com.sun.xml.bind:jaxb-impl:4.0.1")
+    jooqGenerator("jakarta.activation:jakarta.activation-api:2.1.0")
     jooqGenerator("org.yaml:snakeyaml:1.33")
 
 
-    testRuntimeOnly("com.h2database:h2:2.1.210")
+    testRuntimeOnly("com.h2database:h2:2.1.214")
     testImplementation("org.jooq:jooq:${jooqVersion}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
@@ -82,6 +88,9 @@ jooq {
 
                 generator.apply {
                     name = "org.jooq.codegen.DefaultGenerator"
+                    strategy.apply {
+                        name = "org.jooq.codegen.DefaultGeneratorStrategy"
+                    }
                     target.apply {
                         packageName = "com.base.persistence.entities.generated"
                     }

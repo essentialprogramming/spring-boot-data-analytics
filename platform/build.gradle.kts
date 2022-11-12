@@ -15,7 +15,7 @@ dependencies {
         api("org.springdoc:springdoc-openapi-ui:1.6.6")
         api("org.mapstruct:mapstruct-processor:${VersionGroup.mapstruct}")
         api("org.mapstruct:mapstruct:${VersionGroup.mapstruct}")
-        api("org.liquibase:liquibase-core:4.8.0")
+        api("org.liquibase:liquibase-core:4.17.2")
         runtime("com.sun.xml.bind:jaxb-impl:2.3.6")
 
     }
